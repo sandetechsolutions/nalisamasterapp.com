@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nalisa Master App - Admin Login</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom right, #add8e6, #003366);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .login-container {
+        background-color: white;
+        padding: 25px;
+        border-radius: 12px;
+        width: 350px;
+        box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
+        text-align: center;
+    }
+
+    .login-container img {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 15px;
+    }
+
+    h2 {
+        color: #003366;
+        margin-bottom: 20px;
+    }
+
+    input, select, button {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    button {
+        background-color: #003366;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    button:hover {
+        background-color: #002244;
+    }
+
+    .error {
+        color: red;
+        font-size: 13px;
+        margin-top: 5px;
+    }
+</style>
+</head>
+<body>
+
+<div class="login-container">
+    <img src="logo.png" alt="Nalisa Logo">
+    <h2>Nalisa Master App Login</h2>
+
+    <input type="text" id="fullname" placeholder="Full Name" required>
+    <select id="system">
+        <option value="">-- Select System --</option>
+        <option value="medical">Nalisa Medical Solutions</option>
+        <option value="pharmacy">Nalisa Pharmacy Management System</option>
+        <option value="consultancy">Nalisa Consultancy Pro</option>
+    </select>
+    <input type="password" id="password" placeholder="Password" required>
+    <button onclick="login()">Login</button>
+
+    <div class="error" id="error"></div>
+</div>
+
+<script>
+function login() {
+    const fullname = document.getElementById("fullname").value.trim();
+    const system = document.getElementById("system").value;
+    const password = document.getElementById("password").value.trim();
+    const errorDiv = document.getElementById("error");
+
+    errorDiv.textContent = ""; // Clear errors
+
+    if (fullname === "" || system === "" || password === "") {
+        errorDiv.textContent = "Please fill all fields.";
+        return;
+    }
+
+    // Password check
+    let correctPass = "";
+    let redirectUrl = "";
+
+    if (system === "medical") {
+        correctPass = "0001";
+        redirectUrl = "https://sandetechsolutions.github.io/nalisamedsolutions.co.zm/"; // Change to your real link
+    } else if (system === "pharmacy") {
+        correctPass = "1000";
+        redirectUrl = "https://docs.google.com/spreadsheets/d/1Fy-cxoMSyi_1CWhXAUL3LqJr2o0bRTmjz3UqbFcGJKA/edit?usp=sharing";
+    } else if (system === "consultancy") {
+        correctPass = "1001";
+        redirectUrl = "https://sandetechsolutions.github.io/nalisaconsultancypro.co.zm/";
+    }
+
+    if (password === correctPass) {
+        alert("Login successful! Redirecting...");
+        window.location.href = redirectUrl;
+    } else {
+        errorDiv.textContent = "Incorrect password for selected system.";
+    }
+}
+</script>
+
+</body>
+</html>
